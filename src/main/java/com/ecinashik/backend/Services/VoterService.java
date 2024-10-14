@@ -13,4 +13,5 @@ public interface VoterService {
 	List<Voters> searchVoters(String fullName, String village, Integer age, String gender, String assemblyConstituency);
 	Voters updateVoterById(String id, Voters voters);
 	public  Voters deleteVoters(String id);
+	List<Voters> getAllVoters();
 }

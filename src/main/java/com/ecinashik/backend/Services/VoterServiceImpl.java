@@ -21,7 +21,10 @@ public class VoterServiceImpl implements VoterService {
 	public Voters CreateVoter(Voters voters) {
 			return voterRepository.save(voters);
 	}
-
+	@Override
+    public List<Voters> getAllVoters() {
+        return voterRepository.findAll();
+    }
 	
 	@Override
     public Optional<Voters> getVoterById(String id) {
