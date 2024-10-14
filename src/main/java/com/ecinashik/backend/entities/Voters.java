@@ -29,9 +29,6 @@ public class Voters {
 	
 	String assemblyConstituency;
 	
-	@Indexed
-	String dob;
-	
 	String boothURL;
 	
 	String boothAddress;
@@ -116,13 +113,6 @@ public class Voters {
 		this.assemblyConstituency = assemblyConstituency;
 	}
 
-	public String getDob() {
-		return dob;
-	}
-
-	public void setDob(String dob) {
-		this.dob = dob;
-	}
 
 	public String getBoothURL() {
 		return boothURL;
@@ -141,7 +131,7 @@ public class Voters {
 	}
 
 	public Voters(String id, String fullName, String village, int age, String voterId, String boothName, String gender,
-			String district, String blockNameBlockNumber, String assemblyConstituency, String dob, String boothURL,
+			String district, String blockNameBlockNumber, String assemblyConstituency,  String boothURL,
 			String boothAddress) {
 		super();
 		this.id = id;
@@ -154,8 +144,7 @@ public class Voters {
 		this.district = district;
 		this.blockNameBlockNumber = blockNameBlockNumber;
 		this.assemblyConstituency = assemblyConstituency;
-		this.dob = dob;
-		this.boothURL = boothURL;
+				this.boothURL = boothURL;
 		this.boothAddress = boothAddress;
 	}
 
@@ -169,7 +158,7 @@ public class Voters {
 		return "Voters [id=" + id + ", fullName=" + fullName + ", village=" + village + ", age=" + age + ", voterId="
 				+ voterId + ", boothName=" + boothName + ", gender=" + gender + ", district=" + district
 				+ ", blockNameBlockNumber=" + blockNameBlockNumber + ", assemblyConstituency=" + assemblyConstituency
-				+ ", dob=" + dob + ", boothURL=" + boothURL + ", boothAddress=" + boothAddress + "]";
+				+ ", boothURL=" + boothURL + ", boothAddress=" + boothAddress + "]";
 	}
 	
 	
