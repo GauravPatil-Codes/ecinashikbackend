@@ -11,7 +11,15 @@ public class Voters {
 	String id;
 	
 	String fullName;
-	
+	String mrFullName;
+	public String getMrFullName() {
+		return mrFullName;
+	}
+
+	public void setMrFullName(String mrFullName) {
+		this.mrFullName = mrFullName;
+	}
+
 	String village;
 	
 	int age;
@@ -130,12 +138,13 @@ public class Voters {
 		this.boothAddress = boothAddress;
 	}
 
-	public Voters(String id, String fullName, String village, int age, String voterId, String boothName, String gender,
+	public Voters(String id, String fullName,String mrFullName, String village, int age, String voterId, String boothName, String gender,
 			String district, String blockNameBlockNumber, String assemblyConstituency,  String boothURL,
 			String boothAddress) {
 		super();
 		this.id = id;
 		this.fullName = fullName;
+		this.mrFullName=mrFullName;
 		this.village = village;
 		this.age = age;
 		this.voterId = voterId;
@@ -155,7 +164,7 @@ public class Voters {
 
 	@Override
 	public String toString() {
-		return "Voters [id=" + id + ", fullName=" + fullName + ", village=" + village + ", age=" + age + ", voterId="
+		return "Voters [id=" + id + ", fullName=" + fullName + ",mrFullName="+mrFullName+" village=" + village + ", age=" + age + ", voterId="
 				+ voterId + ", boothName=" + boothName + ", gender=" + gender + ", district=" + district
 				+ ", blockNameBlockNumber=" + blockNameBlockNumber + ", assemblyConstituency=" + assemblyConstituency
 				+ ", boothURL=" + boothURL + ", boothAddress=" + boothAddress + "]";
