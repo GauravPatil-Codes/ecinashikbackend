@@ -1,5 +1,6 @@
 package com.ecinashik.backend.Controllers;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import com.ecinashik.backend.dto.VoterSearchRequest;
 import com.ecinashik.backend.entities.Voters;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @RestController
@@ -23,8 +25,7 @@ public class VoterController {
 	@Autowired
 	VoterServiceImpl voterServiceImpl;
 
-
-	@PostMapping("/create")
+ 	@PostMapping("/create")
 	public Voters CreateVoter(@RequestBody Voters voters) {
 
 		return voterServiceImpl.CreateVoter(voters);
@@ -41,6 +42,42 @@ public class VoterController {
 		return voterServiceImpl.getVoterByVoterId(voterId)
 		.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
 	}
+
+	@PostMapping("/search")
+    public ResponseEntity<Map<String, Object>> searchVoters(@RequestBody VoterSearchRequest searchRequest) {
+        List<Voters> voters = voterServiceImpl.searchVoters(
+                searchRequest.getFullName(),
+                searchRequest.getVillage(),
+                searchRequest.getAge(),
+                searchRequest.getGender(),
+                searchRequest.getAssemblyConstituency()
+        );
+        
+        if (voters.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        
+        return ResponseEntity.ok(createResponse(voters));
+    }
+
+    private Map<String, Object> createResponse(List<Voters> voters) {
+        Map<String, Object> response = new HashMap<>();
+        Map<String, Object> data = new HashMap<>();
+        data.put("voters", voters);
+        response.put("data", data);
+        response.put("status", 200);
+        return response;
+    }
+
+    // This method can be used for single voter responses
+    private Map<String, Object> createResponse(Voters voter) {
+        Map<String, Object> response = new HashMap<>();
+        Map<String, Object> data = new HashMap<>();
+        data.put("voter", voter);
+        response.put("data", data);
+        response.put("status", 200);
+        return response;
+    }
 	
 
 	//  @PostMapping("/searchByInfo")
@@ -63,6 +100,31 @@ public class VoterController {
     //     response.put("data", data);
     //     response.put("status", 200);
     //     return ResponseEntity.ok(response);
+    // }
+//  @PostMapping("/search")
+//     public ResponseEntity<Map<String, Object>> searchVoters(@RequestBody VoterSearchRequest searchRequest) {
+//         List<Voters> voters = voterServiceImpl.searchVoters(
+//                 searchRequest.getFullName(),
+//                 searchRequest.getVillage(),
+//                 searchRequest.getAge(),
+//                 searchRequest.getGender(),
+//                 searchRequest.getAssemblyConstituency()
+//         );
+        
+//         if (voters.isEmpty()) {
+//             return ResponseEntity.notFound().build();
+//         }
+        
+//         return ResponseEntity.ok(createResponse(voters));
+//     }
+
+    // private Map<String, Object> createResponse(List<Voters> voters) {
+    //     Map<String, Object> response = new HashMap<>();
+    //     Map<String, Object> data = new HashMap<>();
+    //     data.put("voters", voters);
+    //     response.put("data", data);
+    //     response.put("status", 200);
+    //     return response;
     // }
 
 
