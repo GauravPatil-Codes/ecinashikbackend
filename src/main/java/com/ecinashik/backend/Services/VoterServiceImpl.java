@@ -65,8 +65,7 @@ public class VoterServiceImpl implements VoterService {
             existingVoters.setBoothAddress(voters.getBoothAddress());
             existingVoters.setBoothName(voters.getBoothName());
             existingVoters.setVillage(voters.getVillage());
-            existingVoters.setDob(voters.getDob());
-    
+           
               return voterRepository.save(existingVoters);
         } else {
                return null;

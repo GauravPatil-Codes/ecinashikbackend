@@ -11,8 +11,7 @@ import com.ecinashik.backend.entities.Voters;
 
 @Repository
 public interface VoterRepository extends MongoRepository<Voters,String> {
-    Optional<Voters> findByVoterId(String voterId);
-
+  
     @Query("{ $and: [ " +
     "{ $or: [ { 'fullName': ?0 }, { $expr: { $in: [?0, [null, ''] ] } } ] }, " +
     "{ $or: [ { 'village': ?1 }, { $expr: { $in: [?1, [null, ''] ] } } ] }, " +
@@ -22,5 +21,6 @@ public interface VoterRepository extends MongoRepository<Voters,String> {
     "] }")
 List<Voters> findByFields(String fullName, String village, Integer age, String gender, String assemblyConstituency);
 
+Optional<Voters> findByVoterId(String voterId);
 
 }
