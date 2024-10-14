@@ -94,4 +94,12 @@ public class VoterController {
         return ResponseEntity.ok(response);
     }
 
+	@GetMapping("/listAllvoters")
+    public ResponseEntity<List<Voters>> getAllVoters() {
+        List<Voters> voters = voterServiceImpl.getAllVoters();
+        if (voters.isEmpty()) {
+            return ResponseEntity.noContent().build(); 
+        }
+        return ResponseEntity.ok(voters);
+    }
 }
