@@ -17,7 +17,7 @@ public class Voters {
 	int age;
 	
 	@Indexed
-	int voterId;
+	String voterId;
 	
 	String boothName;
 	
@@ -68,11 +68,11 @@ public class Voters {
 		this.age = age;
 	}
 
-	public int getVoterId() {
+	public String getVoterId() {
 		return voterId;
 	}
 
-	public void setVoterId(int voterId) {
+	public void setVoterId(String voterId) {
 		this.voterId = voterId;
 	}
 
@@ -140,7 +140,7 @@ public class Voters {
 		this.boothAddress = boothAddress;
 	}
 
-	public Voters(String id, String fullName, String village, int age, int voterId, String boothName, String gender,
+	public Voters(String id, String fullName, String village, int age, String voterId, String boothName, String gender,
 			String district, String blockNameBlockNumber, String assemblyConstituency, String dob, String boothURL,
 			String boothAddress) {
 		super();
