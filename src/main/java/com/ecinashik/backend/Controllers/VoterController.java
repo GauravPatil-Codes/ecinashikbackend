@@ -73,4 +73,10 @@ public class VoterController {
 		return response;
 	}
 
+	@PostMapping("/updatevoter/{id}")
+	public Object CreateVoters(@PathVariable("id") String id, @RequestBody Voters voters) {
+
+		return voterServiceImpl.updateVoterById(id, voters);
+
+	}
 }
