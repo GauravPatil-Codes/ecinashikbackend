@@ -54,8 +54,7 @@ public class VoterServiceImpl implements VoterService {
         if (existingVotersOptional.isPresent()) {
             Voters existingVoters = existingVotersOptional.get();
     
-            // Update fields of the existing voter
-            existingVoters.setFullName(voters.getFullName());
+             existingVoters.setFullName(voters.getFullName());
             existingVoters.setAge(voters.getAge());
             existingVoters.setGender(voters.getGender());
             existingVoters.setVoterId(voters.getVoterId());
@@ -68,13 +67,19 @@ public class VoterServiceImpl implements VoterService {
             existingVoters.setVillage(voters.getVillage());
             existingVoters.setDob(voters.getDob());
     
-            // Save and return the updated voter
-            return voterRepository.save(existingVoters);
+              return voterRepository.save(existingVoters);
         } else {
-            // Return null if voter is not found
-            return null;
+               return null;
         }
     }
     
+
+	@Override
+    public Voters deleteVoters(String id) {
+        Voters existingVoters = voterRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Department not found"));
+        voterRepository.delete(existingVoters);
+        return existingVoters;
+    }
 
 }
