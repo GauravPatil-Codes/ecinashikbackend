@@ -46,4 +46,35 @@ public class VoterServiceImpl implements VoterService {
     private boolean isNullOrEmpty(String str) {
         return str == null || str.trim().isEmpty();
     }
+
+	@Override
+    public Voters updateVoterById(String id, Voters voters) {
+        Optional<Voters> existingVotersOptional = voterRepository.findById(id);
+    
+        if (existingVotersOptional.isPresent()) {
+            Voters existingVoters = existingVotersOptional.get();
+    
+            // Update fields of the existing voter
+            existingVoters.setFullName(voters.getFullName());
+            existingVoters.setAge(voters.getAge());
+            existingVoters.setGender(voters.getGender());
+            existingVoters.setVoterId(voters.getVoterId());
+            existingVoters.setDistrict(voters.getDistrict());
+            existingVoters.setAssemblyConstituency(voters.getAssemblyConstituency());
+            existingVoters.setBlockNameBlockNumber(voters.getBlockNameBlockNumber());
+            existingVoters.setBoothURL(voters.getBoothURL());
+            existingVoters.setBoothAddress(voters.getBoothAddress());
+            existingVoters.setBoothName(voters.getBoothName());
+            existingVoters.setVillage(voters.getVillage());
+            existingVoters.setDob(voters.getDob());
+    
+            // Save and return the updated voter
+            return voterRepository.save(existingVoters);
+        } else {
+            // Return null if voter is not found
+            return null;
+        }
+    }
+    
+
 }
