@@ -10,6 +10,7 @@ import com.ecinashik.backend.entities.Voters;
 import com.ecinashik.backend.repositories.VoterRepository;
 
 
+
 @Service
 public class VoterServiceImpl implements VoterService {
 
@@ -30,14 +31,19 @@ public class VoterServiceImpl implements VoterService {
     public Optional<Voters> getVoterByVoterId(String voterId) {
         return voterRepository.findByVoterId(voterId);
     }
+
 	@Override
     public List<Voters> searchVoters(String fullName, String village, Integer age, String gender, String assemblyConstituency) {
-        return voterRepository.findByExactFields(fullName, village, age, gender, assemblyConstituency);
+        return voterRepository.findByFields(
+            isNullOrEmpty(fullName) ? null : fullName,
+            isNullOrEmpty(village) ? null : village,
+            age,
+            isNullOrEmpty(gender) ? null : gender,
+            isNullOrEmpty(assemblyConstituency) ? null : assemblyConstituency
+        );
     }
 
-	// @Override
-    // public List<Voters> searchVoters(String fullName, String village, Integer age, String gender, String assemblyConstituency) {
-    //     return voterRepository.findByAnyField(fullName, village, age, gender, assemblyConstituency);
-    // }
-	
+    private boolean isNullOrEmpty(String str) {
+        return str == null || str.trim().isEmpty();
+    }
 }
