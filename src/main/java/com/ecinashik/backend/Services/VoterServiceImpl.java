@@ -4,10 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Service;
 
 import com.ecinashik.backend.entities.Voters;
 import com.ecinashik.backend.repositories.VoterRepository;
+import org.springframework.data.mongodb.core.query.Query;
 
 
 
@@ -16,6 +19,8 @@ public class VoterServiceImpl implements VoterService {
 
 	@Autowired
 	VoterRepository voterRepository;
+@Autowired
+   private MongoTemplate mongoTemplate;
 
 	@Override
 	public Voters CreateVoter(Voters voters) {
@@ -40,7 +45,7 @@ public class VoterServiceImpl implements VoterService {
         return voterRepository.findByFields(
             isNullOrEmpty(fullName) ? null : fullName,
             isNullOrEmpty(village) ? null : village,
-            age,
+            age == null ? null : age,
             isNullOrEmpty(gender) ? null : gender,
             isNullOrEmpty(assemblyConstituency) ? null : assemblyConstituency
         );
@@ -49,7 +54,9 @@ public class VoterServiceImpl implements VoterService {
     private boolean isNullOrEmpty(String str) {
         return str == null || str.trim().isEmpty();
     }
+   
 
+    
 	@Override
     public Voters updateVoterById(String id, Voters voters) {
         Optional<Voters> existingVotersOptional = voterRepository.findById(id);

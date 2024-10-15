@@ -12,13 +12,7 @@ public class Voters {
 	
 	String fullName;
 	String mrFullName;
-	public String getMrFullName() {
-		return mrFullName;
-	}
-
-	public void setMrFullName(String mrFullName) {
-		this.mrFullName = mrFullName;
-	}
+	
 
 	String village;
 	
@@ -56,7 +50,13 @@ public class Voters {
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
 	}
+	public String getMrFullName() {
+		return mrFullName;
+	}
 
+	public void setMrFullName(String mrFullName) {
+		this.mrFullName = mrFullName;
+	}
 	public String getVillage() {
 		return village;
 	}
